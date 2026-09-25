@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gopher — errands, rentals &amp; reviewers from fellow students</title>
+  <meta name="description" content="Can’t leave class? Book a verified fellow student to print your files, grab your food, or fetch what you forgot — or rent a calculator, umbrella, or reviewer from students nearby. Errands from ₱20. A class project prototype from Naga City.">
+  <meta name="theme-color" content="#5CB6F6">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gopher">
+  <meta property="og:title" content="Gopher — errands, rentals &amp; reviewers from fellow students">
+  <meta property="og:description" content="Book a verified fellow student to print, grab food, or fetch what you forgot — or rent gear and reviewers from students nearby. Errands from ₱20.">
+  <meta property="og:image" content="assets/brand/gopher-logo.png">
+  <meta property="og:image:alt" content="Gopher logo">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="assets/favicon-32.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <script src="js/diag.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/site.css">
+  <noscript><style>.nav-toggle { display: none; } .site-nav { display: block; }</style></noscript>
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <aside class="topbar" aria-label="Prototype notice">
+    <div class="container">
+      <p>Pilot at Ateneo de Naga University · Class project prototype — no real payments.</p>
+    </div>
+  </aside>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><img src="assets/brand/logo.svg" alt="Gopher" width="109" height="32"></a>
+      <button class="btn nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg><span class="sr-only">Menu</span></button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#safety">Safety</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-primary btn-sm header-cta" href="app.html">Try the demo</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="hero-kicker"><img src="assets/brand/logo-mark.svg" alt="" width="24" height="24"> Errands · Rentals · Notes &amp; Books</p>
+          <h1 id="hero-title">Can’t leave class? <span class="hl">Gopher&nbsp;it.</span></h1>
+          <p class="hero-sub">Book a verified fellow student to print your files, grab your food, or fetch what you forgot — or rent a calculator, umbrella, or reviewer from students nearby. Errands from&nbsp;₱20.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary btn-lg" href="app.html">Try the demo <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <a class="btn btn-white btn-lg" href="app.html?as=migs">Earn as a go-runner</a>
+          </div>
+          <ul class="hero-trust">
+            <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg> Verified students</li>
+            <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg> GCash or cash</li>
+            <li><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Money held until delivery</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="ph-statusbar">
+                <span>10:14</span>
+                <span class="ph-sys">
+                  <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+                  <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.6a9.2 9.2 0 0 1 13 0"/><path d="M4.1 7.3a5.4 5.4 0 0 1 7.8 0"/><circle cx="8" cy="10" r="1.1" fill="currentColor" stroke="none"/></svg>
+                  <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="1.8" fill="currentColor"/><rect x="23.6" y="4" width="1.8" height="4" rx=".9" fill="currentColor" opacity=".4"/></svg>
+                </span>
+              </div>
+
+              <div class="ph-appbar">
+                <span class="ph-iconbtn"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg></span>
+                <div class="ph-appbar-title">
+                  <strong>Your errand</strong>
+                  <span>GPH-10482</span>
+                </div>
+                <span class="ph-iconbtn"><svg class="icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>
+              </div>
+
+              <div class="ph-body">
+                <div class="ph-hero-card">
+                  <span class="ph-live"><i></i>On the way · Room 204</span>
+                  <strong class="ph-hero-title">Mika is walking over</strong>
+                  <span class="ph-steps"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+                  <span class="ph-eta"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Arriving in about 6 min</span>
+                </div>
+
+                <div class="ph-card ph-order">
+                  <span class="ph-tile"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></span>
+                  <div class="ph-order-text">
+                    <strong>Print &amp; photocopy</strong>
+                    <span class="ph-file"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Marketing_Plan_Final.pdf</span>
+                    <span class="ph-meta">10 pages × 2 copies · B&amp;W</span>
+                  </div>
+                </div>
+
+                <div class="ph-card ph-runner">
+                  <span class="ph-avatar">MR</span>
+                  <div class="ph-runner-text">
+                    <strong>Mika R. <span class="ph-verified"><svg class="icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg></span></strong>
+                    <span><span class="ph-star">★</span> 4.9 · Go-runner</span>
+                  </div>
+                  <span class="ph-chat"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg></span>
+                </div>
+
+                <ol class="ph-timeline">
+                  <li class="done"><span>Accepted</span><time>10:02</time></li>
+                  <li class="done"><span>Printed · 20 pages</span><time>10:09</time></li>
+                  <li class="now"><span>On the way</span><time>Now</time></li>
+                  <li class="next"><span>Hand-off at Room 204</span></li>
+                </ol>
+              </div>
+
+              <div class="ph-footer">
+                <div class="ph-total">
+                  <span>Total · in Gopher Hold</span>
+                  <strong>₱65</strong>
+                </div>
+                <span class="ph-button">Show hand-off code</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="float-card float-hold">
+            <span class="float-icon"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <span><strong>₱65 in Gopher Hold</strong><small>Released after the hand-off</small></span>
+          </div>
+          <div class="float-card float-code">
+            <small>Hand-off code</small>
+            <span class="code-digits"><b>4</b><b>8</b><b>2</b><b>7</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Survey -->
+    <section class="section" id="survey" aria-labelledby="survey-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Why Gopher</p>
+          <h2 id="survey-title">Built on what students told us</h2>
+          <p class="lead">Before building anything, we asked college students in Naga City what gets in the way between classes.</p>
+        </div>
+        <ul class="stats">
+          <li class="stat">
+            <p class="stat-num">24 <span>of 25</span></p>
+            <p class="stat-label">need help with errands while in school</p>
+            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>
+          </li>
+          <li class="stat">
+            <p class="stat-num">19 <span>of 25</span></p>
+            <p class="stat-label">say their class schedule keeps them from doing errands themselves</p>
+            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+          <li class="stat">
+            <p class="stat-num">23 <span>of 25</span></p>
+            <p class="stat-label">would use a printing &amp; photocopying service</p>
+            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span>
+          </li>
+          <li class="stat">
+            <p class="stat-num">25 <span>of 25</span></p>
+            <p class="stat-label">rated the idea useful — 15 said “very useful”</p>
+            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i><i class="on2"></i></span>
+          </li>
+          <li class="stat">
+            <p class="stat-num">18 <span>of 25</span></p>
+            <p class="stat-label">had never used a service like this</p>
+            <span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </li>
+        </ul>
+        <p class="footnote">Gopher student survey, 2026 · 25 college students from ADNU, UNC, USI and NCF in Naga City. A small sample, so read these as directional.</p>
+      </div>
+    </section>
+
+    <!-- 3. Services -->
+    <section class="section section-tint" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Services</p>
+          <h2 id="services-title">Everything between classes, covered.</h2>
+          <p class="lead">Three services in one app. Book help when you’re stuck, and earn when you’re free.</p>
+        </div>
+        <div class="services">
+          <article class="service">
+            <div class="service-top">
+              <span class="service-icon"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
+              <span class="price-tag">from ₱20</span>
+            </div>
+            <h3>Errands</h3>
+            <p class="service-desc">A fellow student runs it for you while you’re stuck in class.</p>
+            <ul class="service-list">
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg> Print &amp; photocopy</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg> Food &amp; drinks</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg> Get an item from another spot</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg> Deliver or pick up items</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg> School supplies</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg> <span>Medicine &amp; personal needs <span class="muted nowrap">(over-the-counter only)</span></span></li>
+            </ul>
+            <a class="btn btn-soft btn-block" href="app.html#/errand/new">Book an errand <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </article>
+
+          <article class="service">
+            <div class="service-top">
+              <span class="service-icon"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 13v7a2 2 0 0 0 4 0"/><path d="M12 2v2"/><path d="M20.992 13a1 1 0 0 0 .97-1.274 10.284 10.284 0 0 0-19.923 0A1 1 0 0 0 3 13z"/></svg></span>
+              <span class="price-tag">from ₱15/day</span>
+            </div>
+            <h3>Rentals</h3>
+            <p class="service-desc">Borrow what you need for the day from students nearby.</p>
+            <ul class="service-list">
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 13v7a2 2 0 0 0 4 0"/><path d="M12 2v2"/><path d="M20.992 13a1 1 0 0 0 .97-1.274 10.284 10.284 0 0 0-19.923 0A1 1 0 0 0 3 13z"/></svg> Umbrellas &amp; raincoats</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg> Scientific calculators</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 7 8.7 2.7a2.41 2.41 0 0 0-3.4 0L2.7 5.3a2.41 2.41 0 0 0 0 3.4L7 13"/><path d="m8 6 2-2"/><path d="m18 16 2-2"/><path d="m17 11 4.3 4.3c.94.94.94 2.46 0 3.4l-2.6 2.6c-.94.94-2.46.94-3.4 0L11 17"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg> Drafting sets &amp; lab gowns</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 7-3 5h4l-3 5"/><path d="M14.856 6H16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.935"/><path d="M22 14v-4"/><path d="M5.14 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h2.936"/></svg> Powerbanks</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></svg> Cameras &amp; tripods</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg> Lapel mics &amp; ring lights</li>
+            </ul>
+            <a class="btn btn-soft btn-block" href="app.html#/explore?tab=rentals">Rent an item <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </article>
+
+          <article class="service">
+            <div class="service-top">
+              <span class="service-icon"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></span>
+              <span class="price-tag">from ₱15</span>
+            </div>
+            <h3>Notes &amp; Books</h3>
+            <p class="service-desc">Study materials made by students, plus books to rent or buy.</p>
+            <ul class="service-list">
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg> Reviewers</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg> Lecture notes</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg> Study guides</li>
+              <li><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg> Books — rent or buy</li>
+            </ul>
+            <p class="service-note"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg> Original student work only</p>
+            <a class="btn btn-soft btn-block" href="app.html#/explore?tab=notes">Browse notes &amp; books <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. How it works -->
+    <section class="section" id="how-it-works" aria-labelledby="how-title">
+      <div class="container">
+        <div class="section-head section-head-center">
+          <p class="eyebrow">How it works</p>
+          <h2 id="how-title">Help in three taps.</h2>
+          <p class="lead">Need a hand, or have a free period? Either way, it works like this.</p>
+        </div>
+        <div class="how">
+          <div class="how-col how-get">
+            <h3 class="how-title"><span class="how-badge"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg></span> Get help</h3>
+            <ol class="steps">
+              <li>
+                <span class="step-num">1</span>
+                <div>
+                  <h4>Post it</h4>
+                  <p>Say what you need, where you are, and by when. You see the full price before you book.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div>
+                  <h4>Pay with Gopher Hold</h4>
+                  <p>Pay by GCash. Gopher holds the money until the hand-off, and refunds it if the booking is cancelled.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div>
+                  <h4>Show your hand-off code</h4>
+                  <p>When your go-runner arrives, show your 4-digit code. They enter it, and you’re done.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+          <div class="how-col how-earn">
+            <h3 class="how-title"><span class="how-badge"><svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg></span> Earn</h3>
+            <ol class="steps">
+              <li>
+                <span class="step-num">1</span>
+                <div>
+                  <h4>Go online or list an item</h4>
+                  <p>Free period? Go online as a go-runner, or list gear and reviewers you made yourself.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div>
+                  <h4>Do the job or hand it over</h4>
+                  <p>Accept errands that fit your schedule, or meet a renter at a public spot on campus.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div>
+                  <h4>Get paid to your wallet</h4>
+                  <p>Enter the other student’s hand-off code. Gopher Hold releases your pay right away.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Safety -->
+    <section class="section section-tint" id="safety" aria-labelledby="safety-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Safety</p>
+          <h2 id="safety-title">Student to student, safe by design.</h2>
+          <p class="lead">Every booking is between verified students, and your money stays protected until the hand-off.</p>
+        </div>
+        <ul class="tiles">
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg></span>
+            <div>
+              <h3>Verified students</h3>
+              <p>Everyone uploads a student ID or matriculation form, and our team checks it before they can book or earn.</p>
+            </div>
+          </li>
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <div>
+              <h3>Gopher Hold</h3>
+              <p>GCash payments wait with Gopher until the hand-off is confirmed. Cancelled? The money goes back to you.</p>
+            </div>
+          </li>
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <div>
+              <h3>Hand-off codes</h3>
+              <p>The person receiving shows a 4-digit code, and the person handing over enters it. It proves the right person got it.</p>
+            </div>
+          </li>
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></span>
+            <div>
+              <h3>Ratings &amp; reviews from real bookings</h3>
+              <p>Only students who finished a booking with you can rate you — and you rate them too.</p>
+            </div>
+          </li>
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div>
+              <h3>Public meetup spots &amp; in-app chat</h3>
+              <p>Meet at public spots on campus and talk in the app. No phone numbers shared.</p>
+            </div>
+          </li>
+          <li class="tile">
+            <span class="tile-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span>
+            <div>
+              <h3>Support replies within 24 hours</h3>
+              <p>Report a problem anytime. We reply within 24 hours, in English, Filipino, or Bikol.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="section-foot"><a class="link-arrow" href="help.html#safety">Read our safety tips <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- 6. Pricing -->
+    <section class="section" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Pricing</p>
+          <h2 id="pricing-title">Student prices. No surprises.</h2>
+          <p class="lead">You see the full price before you book. Here’s what a few bookings would cost.</p>
+        </div>
+        <div class="receipts">
+          <article class="receipt">
+            <div class="receipt-head">
+              <span class="receipt-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></span>
+              <div>
+                <h3>Printing</h3>
+                <p>10 pages × 2 copies, B&amp;W</p>
+              </div>
+            </div>
+            <ul class="breakdown">
+              <li><span>Printing (20 pages × ₱2)</span><span>₱40</span></li>
+              <li><span>Errand fee <span class="line-sub">goes to your go-runner</span></span><span>₱20</span></li>
+              <li><span>Service fee</span><span>₱5</span></li>
+              <li class="total"><span>Total</span><span>₱65</span></li>
+            </ul>
+          </article>
+
+          <article class="receipt">
+            <div class="receipt-head">
+              <span class="receipt-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 13v7a2 2 0 0 0 4 0"/><path d="M12 2v2"/><path d="M20.992 13a1 1 0 0 0 .97-1.274 10.284 10.284 0 0 0-19.923 0A1 1 0 0 0 3 13z"/></svg></span>
+              <div>
+                <h3>Umbrella</h3>
+                <p>Rented for 1 day</p>
+              </div>
+            </div>
+            <ul class="breakdown">
+              <li><span>Umbrella (1 day × ₱15)</span><span>₱15</span></li>
+              <li><span>Service fee</span><span>₱5</span></li>
+              <li class="total"><span>Total</span><span>₱20</span></li>
+            </ul>
+          </article>
+
+          <article class="receipt">
+            <div class="receipt-head">
+              <span class="receipt-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="7" y="3" width="10" height="6" rx="1.5"/><path d="M12 9v4"/><path d="m12 13-5 8"/><path d="m12 13 5 8"/><path d="M12 13v8"/></svg></span>
+              <div>
+                <h3>Tripod</h3>
+                <p>Rented for 2 days</p>
+              </div>
+            </div>
+            <ul class="breakdown">
+              <li><span>Tripod (2 days × ₱50)</span><span>₱100</span></li>
+              <li><span>Service fee</span><span>₱5</span></li>
+              <li><span>Refundable deposit</span><span>₱200</span></li>
+              <li class="total"><span>Pay now</span><span>₱305</span></li>
+            </ul>
+            <p class="receipt-back"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg> ₱200 back after you return it</p>
+          </article>
+
+          <article class="receipt">
+            <div class="receipt-head">
+              <span class="receipt-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span>
+              <div>
+                <h3>Reviewer</h3>
+                <p>Digital copy, by a student</p>
+              </div>
+            </div>
+            <ul class="breakdown">
+              <li><span>Reviewer</span><span>₱45</span></li>
+              <li><span>Service fee</span><span>₱5</span></li>
+              <li class="total"><span>Total</span><span>₱50</span></li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="price-pills">
+          <span><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg> ₱5 service fee</span>
+          <span><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg> No markup on items</span>
+          <span><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> Pilot pricing</span>
+        </p>
+
+        <details class="price-list">
+          <summary>See all pilot prices</summary>
+          <div class="price-list-body">
+            <div>
+              <h3>Errand fees <span>paid to your go-runner</span></h3>
+              <dl class="kv">
+                <dt>Print &amp; photocopy</dt><dd>₱20</dd>
+                <dt>Food &amp; drinks, get an item, deliver or pick up, school supplies</dt><dd>₱25</dd>
+                <dt>Medicine &amp; personal necessities</dt><dd>₱30</dd>
+                <dt>Rush (within 30 min)</dt><dd>+₱10</dd>
+                <dt>Printing cost, black &amp; white</dt><dd>₱2/page</dd>
+                <dt>Printing cost, color</dt><dd>₱5/page</dd>
+              </dl>
+              <p class="small muted">Items cost exactly what the receipt says. You can always offer your go-runner more.</p>
+            </div>
+            <div>
+              <h3>Rentals <span>per day</span></h3>
+              <dl class="kv">
+                <dt>Umbrella, raincoat, powerbank</dt><dd>₱15</dd>
+                <dt>Scientific calculator</dt><dd>₱20</dd>
+                <dt>Tripod</dt><dd>₱50 <span class="dep">+₱200 deposit</span></dd>
+                <dt>Ring light</dt><dd>₱60 <span class="dep">+₱250 deposit</span></dd>
+                <dt>Lapel mic</dt><dd>₱80 <span class="dep">+₱300 deposit</span></dd>
+                <dt>Camera</dt><dd>₱300 <span class="dep">+₱1,000 deposit</span></dd>
+              </dl>
+              <p class="small muted">Deposits are refundable and go back to you after the lender checks the return.</p>
+            </div>
+            <div>
+              <h3>Notes &amp; books</h3>
+              <dl class="kv">
+                <dt>Reviewers &amp; notes, buy (digital)</dt><dd>₱30–80</dd>
+                <dt>Reviewers &amp; notes, rent for 7 days</dt><dd>₱15–25</dd>
+                <dt>Books, rent</dt><dd>₱50/week</dd>
+              </dl>
+              <p class="small muted">Plus the ₱5 service fee per booking. Go-runners and lenders keep 100% of their fee.</p>
+            </div>
+          </div>
+        </details>
+        <p class="small muted pricing-fine">Pilot pricing: final pricing is still being set. GCash first; cash on hand-off works for errands and no-deposit rentals up to ₱200.</p>
+      </div>
+    </section>
+
+    <!-- 7. Earn -->
+    <section class="section section-flush" id="earn" aria-labelledby="earn-title">
+      <div class="container">
+        <div class="earn">
+          <div class="earn-copy">
+            <p class="eyebrow">Earn with Gopher</p>
+            <h2 id="earn-title">Free period? Turn it into pocket money.</h2>
+            <p>Help the students around you and get paid for it — on your own schedule, without leaving campus.</p>
+            <a class="btn btn-white btn-lg" href="app.html?as=migs">Try it as a go-runner <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+            <p class="earn-fine">Go-runners and lenders must be 18 or older.</p>
+          </div>
+          <ul class="earn-list">
+            <li>
+              <span class="earn-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></span>
+              <div>
+                <h3>Run errands between classes</h3>
+                <p>Go-runners keep 100% of their fee. Gopher’s ₱5 service fee is added on the requester’s side.</p>
+              </div>
+            </li>
+            <li>
+              <span class="earn-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"/><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"/><path d="m2 16 6 6"/><circle cx="16" cy="9" r="2.9"/><circle cx="6" cy="5" r="3"/></svg></span>
+              <div>
+                <h3>Lend gear you’re not using</h3>
+                <p>Rent out your umbrella, calculator, or camera. Deposits and hand-off codes protect your stuff.</p>
+              </div>
+            </li>
+            <li>
+              <span class="earn-icon"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></svg></span>
+              <div>
+                <h3>Sell your own reviewers</h3>
+                <p>Share the reviewers and notes you made for ₱30–80 each. Original work only.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Campuses -->
+    <section class="section" id="campuses" aria-labelledby="campuses-title">
+      <div class="container campus-grid">
+        <div>
+          <p class="eyebrow">Campuses</p>
+          <h2 id="campuses-title">Starting at Ateneo de Naga. More Naga campuses next.</h2>
+          <p class="lead">We’re testing Gopher with ADNU students first, then opening campus by campus.</p>
+          <ul class="campus-list">
+            <li class="campus is-open">
+              <span class="campus-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+              <span class="campus-name">Ateneo de Naga University <span>ADNU</span></span>
+              <span class="badge badge-ok">Open (pilot)</span>
+            </li>
+            <li class="campus">
+              <span class="campus-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+              <span class="campus-name">University of Nueva Caceres <span>UNC</span></span>
+              <span class="badge badge-gray">Coming soon</span>
+            </li>
+            <li class="campus">
+              <span class="campus-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+              <span class="campus-name">Universidad de Sta. Isabel <span>USI</span></span>
+              <span class="badge badge-gray">Coming soon</span>
+            </li>
+            <li class="campus">
+              <span class="campus-icon"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></span>
+              <span class="campus-name">Naga College Foundation <span>NCF</span></span>
+              <span class="badge badge-gray">Coming soon</span>
+            </li>
+          </ul>
+          <p class="small muted">Not affiliated with the schools named.</p>
+        </div>
+
+        <form class="notify" data-demo="notify" action="#" method="post">
+          <span class="notify-icon"><svg class="icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg></span>
+          <h3>Want Gopher at your school?</h3>
+          <p class="muted">Leave your email and we’ll tell you when it opens.</p>
+          <div class="field">
+            <label class="label" for="notify-email">Email</label>
+            <input class="input" id="notify-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required data-error="Enter an email address, like you@example.com.">
+          </div>
+          <div class="field">
+            <label class="label" for="notify-school">School</label>
+            <select class="select" id="notify-school" name="school" required data-error="Choose your school.">
+              <option value="">Choose your school</option>
+              <option>University of Nueva Caceres (UNC)</option>
+              <option>Universidad de Sta. Isabel (USI)</option>
+              <option>Naga College Foundation (NCF)</option>
+              <option>Ateneo de Naga University (ADNU)</option>
+              <option>Another school in Naga</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Notify me</button>
+          <div class="form-status" role="status" aria-live="polite" data-status></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 9. About -->
+    <section class="section section-tint" id="about" aria-labelledby="about-title">
+      <div class="container about">
+        <div class="about-intro">
+          <img class="about-mark" src="assets/brand/logo-mark.svg" alt="" width="88" height="88">
+          <p class="eyebrow">About us</p>
+          <h2 id="about-title">About Gopher</h2>
+          <p class="lead">Gopher Solutions Co. is a partnership established in 2026 in Naga City by five BSBA Marketing Management students of Ateneo de Naga University.</p>
+        </div>
+        <div class="about-cards">
+          <div class="vm">
+            <h3 class="vm-label"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></svg> Vision</h3>
+            <p>To be the leading choice of students seeking an on-demand platform, and become the primary driver for innovation and convenience for the local student community.</p>
+          </div>
+          <div class="vm">
+            <h3 class="vm-label"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> Mission</h3>
+            <p>Gopher strives to connect students, transforming their hurdles into opportunities — one listing at a time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="section-head">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Good questions.</h2>
+          <p class="lead">The quick version. There’s more in the Help center.</p>
+          <a class="btn btn-soft" href="help.html">Visit the Help center <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="faq faq-card">
+          <details>
+            <summary>Is Gopher a real service yet?</summary>
+            <div class="answer">
+              <p>Not yet. Gopher is a class project by BSBA Marketing Management students at Ateneo de Naga University. The demo shows how it would work: no real payments, no real go-runners, and nothing you type leaves your browser.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Who can use Gopher?</summary>
+            <div class="answer">
+              <p>Currently enrolled college students who verify with their student ID or matriculation form. The pilot starts at Ateneo de Naga University, with UNC, USI and NCF next. You need to be 18 or older to be a go-runner or to lend items.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How much does it cost?</summary>
+            <div class="answer">
+              <p>Errand fees start at ₱20 and go to your go-runner. Items cost what the receipt says, with no markup, and printing is ₱2 a page (₱5 for color). Gopher adds a ₱5 service fee per booking. Rentals start at ₱15 a day.</p>
+              <p>These are pilot prices. Final pricing is still being set.</p>
+            </div>
+          </details>
+          <details>
+            <summary>What happens to my money after I pay?</summary>
+            <div class="answer">
+              <p>When you pay by GCash, Gopher Hold keeps the money until the hand-off is confirmed with your 4-digit hand-off code. Then it’s released to your go-runner, lender, or seller. If the booking is cancelled, you get your money back under the <a href="help.html#payments">cancellation rules</a>.</p>
+            </div>
+          </details>
+          <details>
+            <summary>Can I pay with cash?</summary>
+            <div class="answer">
+              <p>Yes, for errands and no-deposit rentals up to ₱200 — you pay at the hand-off. Deposits and digital items need GCash. Cash payments aren’t covered by Gopher Hold.</p>
+            </div>
+          </details>
+          <details>
+            <summary>How do I start earning?</summary>
+            <div class="answer">
+              <p>Verify with your student ID or matriculation form, then go online as a go-runner during a free period, or list gear and reviewers you made yourself. You keep 100% of your fee. Go-runners and lenders must be 18 or older.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. Closing -->
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="container closing-inner">
+        <img src="assets/brand/logo-mark.svg" alt="" width="64" height="64">
+        <h2 id="closing-title">Gopher strives to connect students, transforming their hurdles into opportunities — one listing at a time.</h2>
+        <a class="btn btn-primary btn-lg" href="app.html">Try the demo <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        <p class="closing-fine">It’s a demo: no real payments, and nothing you enter leaves your browser.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><img src="assets/brand/logo-white.svg" alt="Gopher" width="109" height="32"></a>
+          <p>Errands, rentals, and notes &amp; books — from fellow students.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Footer">
+          <h2 class="footer-title">Explore</h2>
+          <ul>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="app.html">Try the demo</a></li>
+          </ul>
+        </nav>
+        <div class="footer-social">
+          <h2 class="footer-title">Follow us <span>· coming soon</span></h2>
+          <ul class="social">
+            <li><a href="#" data-soon aria-label="Instagram (coming soon)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg></a></li>
+            <li><a href="#" data-soon aria-label="TikTok (coming soon)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M13 3v13a4 4 0 1 1-4-4"/><path d="M13 3a5 5 0 0 0 5 5"/></svg></a></li>
+            <li><a href="#" data-soon aria-label="Facebook (coming soon)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-legal">© <span data-year>2026</span> Gopher Solutions Co., Naga City · A class project prototype by BSBA Marketing Management students of Ateneo de Naga University · Not an official service of any school named.</p>
+    </div>
+  </footer>
+</body>
+</html>

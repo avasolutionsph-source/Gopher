@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gopher click-through tests</title>
+  <meta name="robots" content="noindex">
+  <script src="js/diag.js"></script>
+  <style>
+    body { font: 14px/1.5 ui-monospace, Menlo, monospace; margin: 24px; color: #0F172A; }
+    h1 { font: 800 20px system-ui, sans-serif; }
+    .pass { color: #15803D; } .fail { color: #B91C1C; font-weight: 700; }
+    #summary { font-size: 16px; font-weight: 700; padding: 8px 12px; border-radius: 8px; background: #F1F5F9; }
+    iframe { width: 390px; height: 844px; border: 1px solid #CBD5E1; border-radius: 16px; }
+  </style>
+</head>
+<body>
+  <h1>Gopher — click-through tests</h1>
+  <p>Drives the real app in the frame below, clicking the same buttons a presenter would. Uses its own data (<code>?ns=uitest</code>), so your demo data isn't touched. Needs a local server (not file://).</p>
+  <pre id="summary">running…</pre>
+  <ol id="results"></ol>
+  <iframe id="app" title="Gopher app under test"></iframe>
+  <script>
+  (async function () {
+    'use strict';
+    const frame = document.getElementById('app');
+    const results = [];
+    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+    const W = () => frame.contentWindow;
+    const D = () => frame.contentDocument;
+    const $ = (sel) => D().querySelector(sel);
+    const $$ = (sel) => Array.from(D().querySelectorAll(sel));
+
+    async function waitFor(fn, what, ms) {
+      const end = Date.now() + (ms || 8000);
+      for (;;) {
+        let v;
+        try { v = fn(); } catch (e) { v = null; }
+        if (v) return v;
+        if (Date.now() > end) throw new Error('timed out waiting for ' + what);
+        await sleep(50);
+      }
+    }
+    async function load(query, hash) {
+      frame.src = 'about:blank';
+      await sleep(30);
+      frame.src = 'app.html?ns=uitest&reset=1&sim=manual&' + query + hash;
+      await waitFor(() => D() && D().documentElement.classList.contains('booted') && D().documentElement.dataset.viewReady, 'app to boot');
+    }
+    async function route(name) {
+      await waitFor(() => D().documentElement.dataset.viewReady === name, 'screen ' + name);
+      await sleep(30);
+    }
+    function click(target, what) {
+      const el = typeof target === 'string' ? $(open(target)) : target;
+      if (!el) throw new Error('missing ' + (what || target));
+      el.click();
+    }
+    // Sheets that are closing stay in the page for a moment; only look inside open ones.
+    const open = (sel) => sel.replace(/\.sheet\b/g, '.sheet-wrap:not(.is-closing) .sheet');
+    const byText = (sel, text) => $$(open(sel)).find((el) => el.textContent.replace(/\s+/g, ' ').includes(text));
+    async function clickText(sel, text) {
+      const el = await waitFor(() => byText(sel, text), '"' + text + '"');
+      el.click();
+      await sleep(40);
+    }
+    const pill = () => ($('[data-region="head"] .pill') || {}).textContent || '';
+    async function status(text) { await waitFor(() => pill().includes(text), 'status "' + text + '" (now "' + pill() + '")'); }
+    const errors = () => Number(D().documentElement.getAttribute('data-errors') || 0);
+
+    async function test(name, fn) {
+      try { await fn(); if (errors()) throw new Error('page errors: ' + D().documentElement.getAttribute('data-error-list')); results.push({ name, ok: true }); }
+      catch (e) { results.push({ name, ok: false, error: e.message }); }
+    }
+
+    await test('script 1: Bea books a printing errand, pays, and it gets delivered', async () => {
+      await load('as=bea', '#/errand/new?type=print');
+      await route('errandNew');
+      await clickText('button', 'Use sample');
+      await waitFor(() => byText('.file-name', 'Marketing_Plan_Final.pdf'), 'sample file');
+      await clickText('button', 'Next');
+      await waitFor(() => $('select[name="to"]'), 'step 2');
+      await clickText('button', 'Next');
+      await waitFor(() => byText('.breakdown .total', '₱65'), 'total ₱65 on review');
+      await clickText('button', 'Continue to payment');
+      await route('checkout');
+      await clickText('button', 'Pay ₱65');
+      await clickText('.sheet button', 'Confirm demo payment');
+      await route('order');
+      await status('Finding a go-runner');
+      await clickText('.demo-next', 'accepts your errand');
+      await status('Go-runner on it');
+      await waitFor(() => $$('.code-digits span').length === 4, 'hand-off code');
+      await clickText('.demo-next', 'prints your file');
+      await status('Printed');
+      await clickText('.demo-next', 'heads to Room 204');
+      await status('On the way');
+      await clickText('.demo-next', 'enters your hand-off code');
+      await status('Delivered');
+      await waitFor(() => $('form[data-form="rate"]'), 'rating form');
+      click('form[data-form="rate"] button[type="submit"]');
+      await waitFor(() => byText('.action-area', 'You rated this booking'), 'rated');
+    });
+
+    await test('chat: sending a message gets an automatic reply', async () => {
+      const input = $('#chat-input');
+      input.value = 'Thank you so much!';
+      click('form[data-form="chat"] button[type="submit"]');
+      await waitFor(() => byText('.bubble-row.is-mine', 'Thank you so much!'), 'my message');
+      await waitFor(() => { const rows = $$('.bubble-row'); return rows.length && !rows[rows.length - 1].classList.contains('is-mine'); }, 'reply', 9000);
+    });
+
+    await test('script 2: Bea rents the tripod, picks it up and returns it', async () => {
+      await load('as=bea', '#/listing/ls_tripod');
+      await route('listing');
+      click('[data-days="1"]');
+      await waitFor(() => byText('[data-action="book"]', '₱305'), '2 days = ₱305');
+      click('[data-action="book"]');
+      await route('checkout');
+      await waitFor(() => $('input[value="cash"][disabled]'), 'cash disabled (deposit)');
+      await clickText('button', 'Pay ₱305');
+      await clickText('.sheet button', 'Confirm demo payment');
+      await route('order');
+      await status('Request sent');
+      await clickText('.demo-next', 'confirms');
+      await status('Confirmed');
+      await clickText('.demo-next', 'Fast-forward to pickup');
+      await status('In use');
+      await clickText('button', 'Return item');
+      await clickText('.sheet .demo-hint', 'tap to fill');
+      click('.sheet form[data-form="code"] button[type="submit"]');
+      await status('Returned');
+      await clickText('.demo-next', 'checks the returned item');
+      await status('Completed');
+      await waitFor(() => byText('[data-region="money"]', 'Deposit refunded'), 'deposit refunded line');
+    });
+
+    await test('script 3: Bea buys a digital reviewer and opens it', async () => {
+      await load('as=bea', '#/explore?tab=notes&q=Financial');
+      await route('explore');
+      const card = await waitFor(() => byText('.lcard', 'FA1 Midterm Reviewer'), 'FA1 card');
+      card.click();
+      await route('listing');
+      await clickText('[data-action="book"]', 'Buy · ₱50');
+      await route('checkout');
+      await clickText('button', 'Pay ₱50');
+      await clickText('.sheet button', 'Confirm demo payment');
+      await route('order');
+      await status('Unlocked');
+      await clickText('a', 'Open FA1 Midterm Reviewer');
+      await route('reader');
+      await waitFor(() => $('.rpage[data-mark*="Bea S."]'), 'watermark with my name');
+    });
+
+    await test('script 4: Migs accepts a food job, delivers with the code, cashes out', async () => {
+      await load('as=migs', '#/order/GPH-10501');
+      await route('order');
+      await clickText('button', 'Accept job');
+      await status('Go-runner on it');
+      await clickText('button', 'Mark as bought');
+      await clickText('.sheet button', 'Confirm');
+      await status('Bought');
+      await clickText('button', 'Start delivery');
+      await status('On the way');
+      await waitFor(() => byText('.bubble-row', 'hand-off code'), 'requester sends the code in chat', 9000);
+      await clickText('button', 'Enter hand-off code');
+      await clickText('.sheet .demo-hint', 'tap to fill');
+      click('.sheet form[data-form="code"] button[type="submit"]');
+      await status('Delivered');
+      W().location.hash = '#/wallet';
+      await route('wallet');
+      await clickText('button', 'Cash out to GCash');
+      click('.sheet form button[type="submit"]');
+      await waitFor(() => byText('.txlist', 'Cashed out to GCash (demo)'), 'cash-out in history');
+    });
+
+    await test('script 5: Migs lists a ring light and handles a rental request', async () => {
+      await load('as=migs', '#/list/new?kind=rental');
+      await route('listNew');
+      await clickText('button', 'Use sample');
+      await waitFor(() => $('input[name="title"]').value.includes('Ring light'), 'sample filled');
+      await clickText('button', 'Publish listing');
+      await route('listing');
+      W().Gopher.sim.next();
+      await waitFor(() => W().Gopher.store.sync.myOrders().some((o) => o.status === 'requested'), 'rental request');
+      const o = W().Gopher.store.sync.myOrders().find((x) => x.status === 'requested');
+      W().location.hash = '#/order/' + o.id;
+      await route('order');
+      await clickText('button', 'Accept request');
+      await status('Confirmed');
+      await waitFor(() => byText('.bubble-row', 'pickup code'), 'renter sends pickup code', 9000);
+      await clickText('button', 'Hand it over');
+      await clickText('.sheet .demo-hint', 'tap to fill');
+      click('.sheet form[data-form="code"] button[type="submit"]');
+      await status('In use');
+      await clickText('.demo-next', 'Fast-forward to return');
+      await status('Returned');
+      await clickText('button', 'Looks good');
+      await clickText('.sheet button', 'Looks good');
+      await status('Completed');
+    });
+
+    await test('scenario: report a missing drink, support refunds it', async () => {
+      await load('scenario=problem', '');
+      await route('order');
+      await status('Delivered');
+      await clickText('button', 'Report a problem');
+      await clickText('.sheet button', 'Use sample');
+      click('.sheet form button[type="submit"]');
+      await waitFor(() => byText('[data-region="ticket"]', 'Open'), 'ticket open');
+      await clickText('.demo-next', 'Gopher Support answers');
+      await waitFor(() => byText('[data-region="ticket"]', 'Resolved'), 'ticket resolved');
+      await waitFor(() => byText('[data-region="money"]', 'Refunded by support'), 'refund line');
+    });
+
+    await test('sign-up: upload a student ID, get verified, then book', async () => {
+      await load('as=bea', '#/home');
+      await route('home');
+      W().Gopher.store.sync.logout();
+      W().location.hash = '#/signup';
+      await route('signup');
+      const f = $('form[data-form="signup"]');
+      f.first.value = 'Juan'; f.last.value = 'Dela Cruz'; f.email.value = 'juan.delacruz@gmail.com';
+      f.terms.checked = true; f.age.checked = true;
+      click(f.querySelector('button[type="submit"]'));
+      await waitFor(() => $('form[data-form="verify"]'), 'verification step');
+      click('form[data-form="verify"] button[type="submit"]');
+      await waitFor(() => byText('[data-error]', 'Upload a photo'), 'photo required');
+      await clickText('button', 'Use sample');
+      await waitFor(() => $('.proof-prev img'), 'sample photo preview');
+      $('input[name="match"]').checked = true;
+      click('form[data-form="verify"] button[type="submit"]');
+      await route('home');
+      await waitFor(() => byText('h1', 'Juan'), 'greeting with my name');
+      await waitFor(() => byText('.notice', 'checking your student ID'), 'in-review banner');
+      await waitFor(() => W().Gopher.store.sync.me().verified, 'verified by the simulated review', 12000);
+      await waitFor(() => !byText('.notice', 'checking your student ID'), 'banner gone');
+    });
+
+    await test('every screen opens without errors', async () => {
+      await load('as=bea', '#/home');
+      for (const [hash, name] of [['#/explore?tab=rentals', 'explore'], ['#/explore?tab=jobs', 'explore'], ['#/activity', 'activity'], ['#/profile', 'profile'],
+        ['#/wallet', 'wallet'], ['#/notifications', 'notifications'], ['#/user/u_kyla', 'user'], ['#/listing/ac_bk_mktg', 'listing'],
+        ['#/list/new?kind=academic', 'listNew'], ['#/order/GPH-10482', 'order'], ['#/nope', 'notFound']]) {
+        W().location.hash = hash;
+        await route(name);
+      }
+    });
+
+    const failed = results.filter((r) => !r.ok);
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    document.getElementById('results').innerHTML = results.map((r) =>
+      '<li class="' + (r.ok ? 'pass' : 'fail') + '">' + (r.ok ? 'PASS ' : 'FAIL ') + esc(r.name) + (r.ok ? '' : ' — ' + esc(r.error)) + '</li>').join('');
+    document.getElementById('summary').textContent = 'PASS ' + (results.length - failed.length) + ' / FAIL ' + failed.length;
+    document.documentElement.setAttribute('data-tests-done', failed.length ? 'fail' : 'pass');
+    try { Object.keys(localStorage).filter((k) => k.startsWith('gopher.uitest')).forEach((k) => localStorage.removeItem(k)); } catch (e) { /* ignore */ }
+  })();
+  </script>
+</body>
+</html>

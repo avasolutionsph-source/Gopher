@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gopher tests</title>
+  <meta name="robots" content="noindex">
+  <script src="js/diag.js"></script>
+  <style>
+    body { font: 14px/1.5 ui-monospace, Menlo, monospace; margin: 24px; color: #0F172A; }
+    h1 { font: 800 20px system-ui, sans-serif; }
+    .pass { color: #15803D; } .fail { color: #B91C1C; font-weight: 700; }
+    #summary { font-size: 16px; font-weight: 700; padding: 8px 12px; border-radius: 8px; background: #F1F5F9; }
+  </style>
+</head>
+<body>
+  <h1>Gopher — automated checks</h1>
+  <p>Runs the five demo scripts plus pricing, cancellation, permission and safety rules against the real data layer and simulator. Not linked from the site.</p>
+  <pre id="summary">running…</pre>
+  <ol id="results"></ol>
+
+  <script src="js/config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/seed.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/sim.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+  (function (G) {
+    'use strict';
+    const S = G.store.sync, C = G.config;
+    const results = [];
+    let clock = Date.now();
+    G.clock.now = () => clock;
+    const tick = (ms) => { clock += ms; };
+
+    function fail(msg) { throw new Error(msg); }
+    function ok(cond, msg) { if (!cond) fail(msg || 'expected true'); }
+    function eq(a, b, msg) { if (a !== b) fail((msg ? msg + ': ' : '') + 'expected ' + JSON.stringify(b) + ', got ' + JSON.stringify(a)); }
+    function throwsCode(fn, code, msg) {
+      try { fn(); } catch (e) { if (e.code === code) return; fail((msg || 'wrong error') + ': got ' + (e.code || e.message)); }
+      fail((msg || 'expected an error') + ' ' + code);
+    }
+    function test(name, fn) {
+      try { fn(); results.push({ name, ok: true }); }
+      catch (e) { results.push({ name, ok: false, error: e.message }); }
+    }
+    function fresh(who) {
+      S.init({ key: 'gopher.test.v1', reset: true });
+      S.setSetting('sim', 'auto');
+      if (who) S.login(who);
+    }
+    const nextFor = (id) => { const s = G.sim.next(id); ok(s, 'a simulated step should be waiting for ' + id); return s; };
+
+    // ---- data & seed -----------------------------------------------------------------
+    test('seed: every listing owner and booking party exists', () => {
+      fresh();
+      const st = S.raw();
+      Object.values(st.listings).forEach((l) => ok(st.users[l.ownerId], 'owner of ' + l.id));
+      Object.values(st.orders).forEach((o) => { ok(st.users[o.requesterId], 'requester ' + o.id); if (o.providerId) ok(st.users[o.providerId], 'provider ' + o.id); });
+      eq(S.openJobs().length, 7, 'open errand jobs');
+      ok(st.users.u_bea && st.users.u_migs, 'personas');
+    });
+    test('seed: no author names used for fictional people', () => {
+      fresh();
+      const names = S.users().map((u) => u.first + ' ' + u.last).join(' | ');
+      ['Casquejo', 'Hernandez', 'Nolasco', 'Susano', 'Villere'].forEach((n) => ok(!names.includes(n), n + ' must not appear'));
+    });
+    test('icons: every category and errand icon exists', () => {
+      const names = new Set(G.icon.names);
+      Object.values(C.ERRAND_TYPES).forEach((t) => ok(names.has(t.icon), t.icon));
+      Object.values(C.RENTAL_CATS).concat(Object.values(C.ACADEMIC_CATS)).forEach((c) => ok(names.has(c.icon), c.icon));
+      ['handshake', 'life-buoy', 'download', 'tripod', 'house', 'badge-check'].forEach((n) => ok(names.has(n), n));
+    });
+    test('storage: saved to localStorage and read back after a reload', () => {
+      fresh('u_bea');
+      const seq = S.raw().seq;
+      S.updateMe({ bio: 'hello' });
+      S.init({ key: 'gopher.test.v1' });
+      eq(S.me().bio, 'hello', 'bio after re-init');
+      eq(S.raw().seq, seq + 0, 'seq kept');
+    });
+
+    // ---- pricing ----------------------------------------------------------------------------
+    test('pricing: printing 10 pages x 2 copies B&W = ₱40 + ₱20 fee + ₱5 service = ₱65', () => {
+      fresh('u_bea');
+      const q = S.quote({ kind: 'errand', input: { type: 'print', details: { pages: 10, copies: 2, color: 'bw' } } });
+      eq(q.items, 40); eq(q.fee, 20); eq(q.service, 5); eq(q.total, 65);
+      const r = S.quote({ kind: 'errand', input: { type: 'print', rush: true, details: { pages: 10, copies: 2, color: 'color' } } });
+      eq(r.total, 20 + 10 + 100 + 5, 'rush + color');
+    });
+    test('pricing: tripod 2 days = ₱100 + ₱200 deposit + ₱5; cash not allowed with a deposit', () => {
+      fresh('u_bea');
+      const q = S.quote({ kind: 'rental', input: { listingId: 'ls_tripod', days: 2 } });
+      eq(q.total, 305);
+      const cash = S.payOptions(q).find((p) => p.method === 'cash');
+      ok(cash && !cash.ok && /deposit/.test(cash.reason), 'cash blocked because of deposit');
+    });
+    test('pricing: cash is fine for a small errand but not over ₱200 or for digital items', () => {
+      fresh('u_bea');
+      const small = S.quote({ kind: 'errand', input: { type: 'food', budget: 90 } });
+      ok(S.payOptions(small).find((p) => p.method === 'cash').ok, 'small errand cash ok');
+      const big = S.quote({ kind: 'errand', input: { type: 'food', budget: 400 } });
+      ok(!S.payOptions(big).find((p) => p.method === 'cash').ok, 'big errand cash blocked');
+      const dig = S.quote({ kind: 'purchase', input: { listingId: 'ac_fa1', access: 'keep' } });
+      ok(!S.payOptions(dig).find((p) => p.method === 'cash').ok, 'digital cash blocked');
+    });
+
+    // ---- Script 1: Bea prints and gets it delivered --------------------------------------------
+    test('script 1: printing errand runs end to end and pays the go-runner', () => {
+      fresh('u_bea');
+      const mika0 = S.user('u_mika').wallet.available;
+      const d = S.createDraft('errand', { type: 'print', title: 'Print Marketing_Plan_Final.pdf', details: { file: 'Marketing_Plan_Final.pdf', pages: 10, copies: 2, color: 'bw', size: 'Short', staple: true },
+        from: 'Print shop near Main Gate', to: 'Room 204', neededBy: clock + 45 * 60000, rush: false, fee: 20 });
+      const o = S.pay(d, 'gcash');
+      eq(o.status, 'open'); eq(o.money.state, 'held'); eq(o.money.total, 65);
+      eq(S.pay(d, 'gcash').id, o.id, 'paying twice returns the same booking');
+      const peek = G.sim.peek(o.id);
+      eq(peek.action, 'accept'); eq(peek.actorId, 'u_mika');
+      tick(2000); G.sim.tick();
+      if (!document.hidden) eq(S.order(o.id).status, 'open', 'not accepted before its delay');
+      tick(4000); G.sim.tick();
+      if (!document.hidden) eq(S.order(o.id).status, 'accepted', 'accepted after the delay');
+      else nextFor(o.id);
+      eq(S.order(o.id).providerId, 'u_mika');
+      nextFor(o.id); eq(S.order(o.id).status, 'bought'); eq(S.order(o.id).errand.actual, 40, 'receipt equals printing cost');
+      nextFor(o.id); eq(S.order(o.id).status, 'on_the_way');
+      nextFor(o.id); eq(S.order(o.id).status, 'completed');
+      eq(S.order(o.id).money.state, 'released');
+      eq(S.user('u_mika').wallet.available, mika0 + 20 + 40, 'fee + reimbursement');
+      ok(S.order(o.id).chat.some((m) => m.from === 'u_mika'), 'runner chatted');
+      const before = S.ratingOf('u_mika').count;
+      S.review(o.id, { stars: 5, text: 'Fast!' });
+      eq(S.ratingOf('u_mika').count, before + 1);
+      throwsCode(() => S.review(o.id, { stars: 4 }), 'CONFLICT', 'second review blocked');
+    });
+
+    // ---- Script 2: Bea rents the tripod ------------------------------------------------------------
+    test('script 2: tripod rental with codes, return check and deposit refund', () => {
+      fresh('u_bea');
+      const migs0 = S.user('u_migs').wallet.available;
+      const d = S.createDraft('rental', { listingId: 'ls_tripod', days: 2 });
+      const o = S.pay(d, 'gcash');
+      eq(o.status, 'requested'); eq(o.providerId, 'u_migs');
+      nextFor(o.id); eq(S.order(o.id).status, 'confirmed');
+      const s = G.sim.peek(o.id); ok(s.manual, 'pickup is a manual fast-forward');
+      nextFor(o.id); eq(S.order(o.id).status, 'in_use'); ok(S.order(o.id).rental.returnBy > clock, 'return-by set');
+      throwsCode(() => S.act(o.id, 'return', { code: '0000' }, 'u_bea'), 'BAD_CODE', 'wrong return code');
+      S.act(o.id, 'return', { code: S.order(o.id).returnCode }, 'u_bea');
+      eq(S.order(o.id).status, 'returned');
+      nextFor(o.id); eq(S.order(o.id).status, 'completed');
+      eq(S.user('u_migs').wallet.available, migs0 + 100, 'lender paid the rent');
+      eq(S.order(o.id).money.state, 'released');
+    });
+
+    // ---- Script 3: Bea buys a digital reviewer --------------------------------------------------------
+    test('script 3: digital reviewer unlocks instantly and pays the seller', () => {
+      fresh('u_bea');
+      const rica0 = S.user('u_rica').wallet.available;
+      const d = S.createDraft('purchase', { listingId: 'ac_fa1', access: 'keep' });
+      throwsCode(() => S.pay(d, 'cash'), 'INVALID', 'cash refused for digital');
+      const o = S.pay(d, 'gcash');
+      eq(o.status, 'unlocked'); eq(o.money.total, 50);
+      eq(S.user('u_rica').wallet.available, rica0 + 45);
+      const r7 = S.pay(S.createDraft('purchase', { listingId: 'ac_fa1', access: 'rent7' }), 'gcash');
+      eq(r7.money.fee, 20); ok(r7.purchase.expiresAt > clock, '7-day access');
+    });
+
+    // ---- Script 4: Migs runs a food errand and cashes out ------------------------------------------------
+    test('script 4: go-runner accepts a job, uses the hand-off code, gets rated, cashes out', () => {
+      fresh('u_migs');
+      S.updateMe({ online: true });
+      const w0 = S.me().wallet.available;
+      const id = 'GPH-10501';
+      S.act(id, 'accept', {}, 'u_migs');
+      eq(S.order(id).status, 'accepted'); eq(S.order(id).providerId, 'u_migs');
+      throwsCode(() => S.act(id, 'depart', {}, 'u_migs'), 'CONFLICT', 'must buy before departing');
+      S.act(id, 'buy', { actual: 164 }, 'u_migs');
+      S.act(id, 'depart', {}, 'u_migs');
+      eq(S.order(id).status, 'on_the_way');
+      const code = G.sim.peek(id); eq(code.action, 'shareCode');
+      G.sim.next(id);
+      ok(S.order(id).chat.some((m) => m.text.includes(S.order(id).code)), 'requester sent the code in chat');
+      throwsCode(() => S.act(id, 'deliver', { code: '1111' }, 'u_migs'), 'BAD_CODE');
+      S.act(id, 'deliver', { code: S.order(id).code }, 'u_migs');
+      eq(S.order(id).status, 'completed');
+      eq(S.me().wallet.available, w0 + 25 + 164, 'fee + reimbursement');
+      eq(S.order(id).money.refund, 180 - 164, 'unused budget back to the requester');
+      const before = S.ratingOf('u_migs').count;
+      nextFor(id);
+      eq(S.ratingOf('u_migs').count, before + 1, 'requester rated the runner');
+      S.cashOut(500);
+      eq(S.me().wallet.available, w0 + 25 + 164 - 500);
+      throwsCode(() => S.cashOut(10), 'INVALID', 'minimum cash-out');
+    });
+
+    // ---- Script 5: Migs lists a ring light and lends it ---------------------------------------------------
+    test('script 5: new listing gets a simulated rental request and completes', () => {
+      fresh('u_migs');
+      const w0 = S.me().wallet.available;
+      const l = S.createListing({ kind: 'rental', cat: 'tech', title: 'Ring light 10" with stand', price: 50, value: 1200, deposit: 250, spot: 'Student lounge' });
+      eq(l.status, 'live');
+      const s = G.sim.peek(); eq(s.action, 'request');
+      G.sim.next();
+      const o = S.myOrders().find((x) => x.listingId === l.id);
+      ok(o, 'request created'); eq(o.status, 'requested'); eq(o.requesterId, 'u_ivan');
+      S.act(o.id, 'confirm', {}, 'u_migs');
+      G.sim.next(o.id);
+      ok(S.order(o.id).chat.some((m) => m.text.includes(o.code)), 'renter shared pickup code');
+      S.act(o.id, 'handover', { code: o.code }, 'u_migs');
+      eq(S.order(o.id).status, 'in_use');
+      G.sim.next(o.id); eq(S.order(o.id).status, 'returned');
+      S.act(o.id, 'close', {}, 'u_migs');
+      eq(S.order(o.id).status, 'completed');
+      eq(S.me().wallet.available, w0 + 50);
+      eq(G.sim.steps().filter((x) => x.listingId === l.id).length, 0, 'only one simulated request per listing');
+    });
+    test('academic listings go to review first, then live', () => {
+      fresh('u_bea');
+      const l = S.createListing({ kind: 'academic', cat: 'reviewer', format: 'digital', title: 'Statics Prelim Reviewer', price: 45, pages: 20 });
+      eq(l.status, 'review');
+      G.sim.next();
+      eq(S.listing(l.id).status, 'live');
+    });
+
+    // ---- Script 6 / rules ----------------------------------------------------------------------------------
+    test('report a problem: ticket, support reply, refund from the runner', () => {
+      fresh('u_bea');
+      const d = S.createDraft('errand', { type: 'food', title: 'Food', details: { items: '2 rice, 2 tea' }, from: 'Food stalls outside Back Gate', to: 'Room 204', fee: 25, budget: 180 });
+      const o = S.pay(d, 'gcash');
+      ['accept', 'buy', 'depart', 'deliver'].forEach(() => G.sim.next(o.id));
+      eq(S.order(o.id).status, 'completed');
+      const w0 = S.user(S.order(o.id).providerId).wallet.available;
+      const t = S.report(o.id, { reason: 'Missing or wrong items', amount: 25, detail: 'One iced tea missing' });
+      eq(t.status, 'open');
+      const step = G.sim.steps().find((x) => x.action === 'support'); ok(step, 'support step pending');
+      step.run();
+      eq(S.ticket(t.id).status, 'resolved');
+      eq(S.order(o.id).money.supportRefund, 25);
+      eq(S.user(S.order(o.id).providerId).wallet.available, w0 - 25);
+    });
+    test('cancel: free while open, ₱10 after a runner accepts, blocked after buying', () => {
+      fresh('u_bea');
+      const mk = () => S.pay(S.createDraft('errand', { type: 'print', title: 'x', details: { pages: 5, copies: 1, color: 'bw' }, from: 'Print shop near Main Gate', to: 'Room 204', fee: 20 }), 'gcash');
+      const a = mk();
+      S.act(a.id, 'cancel', {}, 'u_bea');
+      eq(S.order(a.id).money.state, 'refunded'); eq(S.order(a.id).money.refund, a.money.total);
+      const b = mk();
+      G.sim.next(b.id);
+      const runner = S.order(b.id).providerId;
+      const w0 = S.user(runner).wallet.available;
+      eq(S.cancelInfo(S.order(b.id), 'u_bea').fee, 10);
+      S.act(b.id, 'cancel', {}, 'u_bea');
+      eq(S.order(b.id).money.refund, b.money.total - 10);
+      eq(S.user(runner).wallet.available, w0 + 10);
+      const c = mk();
+      G.sim.next(c.id); G.sim.next(c.id);
+      eq(S.order(c.id).status, 'bought');
+      ok(!S.cancelInfo(S.order(c.id), 'u_bea').allowed, 'no cancel after buying');
+      throwsCode(() => S.act(c.id, 'cancel', {}, 'u_bea'), 'CONFLICT');
+    });
+    test('permissions: wrong side or wrong order is refused', () => {
+      fresh('u_bea');
+      const o = S.pay(S.createDraft('rental', { listingId: 'ls_calc991', days: 1 }), 'gcash');
+      throwsCode(() => S.act(o.id, 'confirm', {}, 'u_bea'), 'FORBIDDEN', 'renter cannot confirm');
+      throwsCode(() => S.act(o.id, 'close', {}, 'u_enzo'), 'CONFLICT', 'cannot close before return');
+      throwsCode(() => S.act('GPH-10501', 'accept', {}, 'u_trish'), 'FORBIDDEN', 'cannot take your own errand');
+      throwsCode(() => S.pay(S.createDraft('rental', { listingId: 'ac_mktg', days: 1 }), 'gcash'), 'INVALID', 'cannot rent your own listing');
+    });
+    test('simulator: a step only runs once (idempotent)', () => {
+      fresh('u_bea');
+      const o = S.pay(S.createDraft('rental', { listingId: 'ls_calc991', days: 1 }), 'gcash');
+      const step = G.sim.peek(o.id);
+      step.run(); step.run();
+      eq(S.order(o.id).status, 'confirmed');
+      eq(S.order(o.id).timeline.filter((t) => t.status === 'confirmed').length, 1, 'one confirm entry');
+    });
+    test('chat: simulated students reply automatically', () => {
+      fresh('u_bea');
+      S.setSetting('sim', 'manual');
+      S.sendMessage('GPH-10490', 'Hi Kyla!');
+      eq(G.sim.steps().filter((x) => x.action === 'reply').length, 1, 'only the fresh message gets a reply');
+      const r = G.sim.steps().find((x) => x.action === 'reply');
+      ok(r && r.always, 'reply step is automatic even in manual mode');
+      r.run();
+      eq(S.order('GPH-10490').chat.slice(-1)[0].from, 'u_kyla');
+    });
+    test('data rights: export has my data; delete needs finished bookings first', () => {
+      fresh('u_bea');
+      const x = S.exportMyData();
+      ok(x.profile.email.includes('@') && x.bookings.length > 0, 'export');
+      eq(x.profile.verification.status, 'verified'); eq(x.profile.verification.photoKept, false, 'no ID photo kept');
+      throwsCode(() => S.deleteAccount(), 'INVALID', 'active umbrella rental blocks delete');
+      fresh('u_joaquin');
+      S.deleteAccount();
+      ok(!S.me(), 'logged out after delete');
+      eq(S.user('u_joaquin').first, 'Deleted');
+      eq(S.listings({ ownerId: 'u_joaquin' }).length, 0, 'listings removed');
+    });
+    test('sign-up: needs a student ID or matriculation upload; locked until the check passes', () => {
+      fresh();
+      throwsCode(() => S.signup({ first: 'Test', last: 'User', email: 'test@gmail.com' }), 'INVALID', 'no proof method');
+      throwsCode(() => S.signup({ first: 'Test', last: 'User', email: 'test@gmail.com', method: 'id' }), 'INVALID', 'no photo');
+      throwsCode(() => S.signup({ first: 'Test', last: 'User', email: 'not-an-email', method: 'id', proof: true }), 'INVALID', 'bad email');
+      const u = S.signup({ first: 'Test', last: 'User', email: 'test.user@gmail.com', method: 'matriculation', proof: true, proofName: 'cor.jpg' });
+      eq(S.me().id, u.id);
+      eq(u.verified, false); eq(u.verification.status, 'pending'); eq(u.verification.method, 'matriculation');
+      ok(!('photo' in u.verification) && !JSON.stringify(S.raw()).includes('data:image'), 'the photo is never stored');
+      throwsCode(() => S.pay(S.createDraft('rental', { listingId: 'ls_calc991', days: 1 }), 'gcash'), 'UNVERIFIED', 'cannot book yet');
+      throwsCode(() => S.updateMe({ online: true }), 'UNVERIFIED', 'cannot go online yet');
+      throwsCode(() => S.createListing({ kind: 'rental', cat: 'calc', title: 'My calculator', price: 20 }), 'UNVERIFIED', 'cannot list yet');
+      const step = G.sim.steps().find((x) => x.action === 'verify');
+      ok(step && step.always, 'verification check is pending');
+      step.run();
+      eq(S.me().verified, true); eq(S.me().verification.status, 'verified');
+      eq(S.pay(S.createDraft('rental', { listingId: 'ls_calc991', days: 1 }), 'gcash').status, 'requested', 'can book after');
+    });
+
+    // ---- safety -------------------------------------------------------------------------------------------------
+    test('XSS: user text is escaped everywhere it is rendered', () => {
+      fresh('u_bea');
+      const bad = '<img src=x onerror="window.__xss=1">';
+      eq(String(G.util.html`<p>${bad}</p>`), '<p>&lt;img src=x onerror=&quot;window.__xss=1&quot;&gt;</p>');
+      const l = S.createListing({ kind: 'rental', cat: 'tech', title: bad, desc: bad, price: 20 });
+      const card = String(G.ui.listingCard(l));
+      ok(!card.includes('<img src=x'), 'title escaped in card');
+      const box = document.createElement('div');
+      box.innerHTML = card;
+      document.body.appendChild(box);
+      ok(!window.__xss, 'no script ran');
+      box.remove();
+      ok(!G.util.isImageData('javascript:alert(1)') && G.util.isImageData('data:image/jpeg;base64,AAAA'), 'photo URL check');
+    });
+
+    // ---- report -------------------------------------------------------------------------------------------------
+    const failed = results.filter((r) => !r.ok);
+    document.getElementById('results').innerHTML = results.map((r) =>
+      '<li class="' + (r.ok ? 'pass' : 'fail') + '">' + (r.ok ? 'PASS ' : 'FAIL ') + G.util.esc(r.name) + (r.ok ? '' : ' — ' + G.util.esc(r.error)) + '</li>').join('');
+    const errs = (window.__gopherErrors || []).length;
+    document.getElementById('summary').textContent = 'PASS ' + (results.length - failed.length) + ' / FAIL ' + failed.length + ' / page errors ' + errs + (document.hidden ? ' (tab hidden: timer test used Next)' : '');
+    document.documentElement.setAttribute('data-tests-done', failed.length ? 'fail' : 'pass');
+    try { localStorage.removeItem('gopher.test.v1'); } catch (e) { /* ignore */ }
+  })(window.Gopher);
+  </script>
+</body>
+</html>

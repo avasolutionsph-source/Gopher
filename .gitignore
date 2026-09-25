@@ -1,0 +1,5 @@
+# macOS
+.DS_Store
+# temporary check pages and verification output
+_*.html
+.verify/

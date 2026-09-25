@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 270" role="img" aria-labelledby="t">
+  <title id="t">Gopher</title>
+  <path d="M216.13 166.7A100 115 0 1 1 198.8 64.2L163.34 88.24A57 72 0 1 0 174.79 154.85ZM130 128L212 128Q214 128 214 130L214 158Q214 160 212 160L178 160Q176 160 176 158L176 152Q176 150 174 150L130 150Q128 150 128 148L128 130Q128 128 130 128Z" fill="#5CB6F6" stroke="#5CB6F6" stroke-width="20" stroke-linejoin="round"/>
+  <path transform="translate(0 -2) rotate(-3 435 172)" d="M394 85H414A14 14 0 0 1 428 99V246A14 14 0 0 1 414 260H394A14 14 0 0 1 380 246V99A14 14 0 0 1 394 85ZM390 85H436A54 54 0 0 1 436 193H390ZM428 121V157H440A18 18 0 0 0 440 121Z" fill="#5CB6F6"/>
+  <path transform="translate(0 2) rotate(2 571 172)" d="M514 85H534A14 14 0 0 1 548 99V246A14 14 0 0 1 534 260H514A14 14 0 0 1 500 246V99A14 14 0 0 1 514 85ZM608 85H628A14 14 0 0 1 642 99V246A14 14 0 0 1 628 260H608A14 14 0 0 1 594 246V99A14 14 0 0 1 608 85ZM544 151H598A4 4 0 0 1 602 155V189A4 4 0 0 1 598 193H544A4 4 0 0 1 540 189V155A4 4 0 0 1 544 151Z" fill="#5CB6F6"/>
+  <path transform="translate(0 -3) rotate(-2.5 709 172)" d="M668 85H688A14 14 0 0 1 702 99V246A14 14 0 0 1 688 260H668A14 14 0 0 1 654 246V99A14 14 0 0 1 668 85ZM668 85H748A14 14 0 0 1 762 99V113A14 14 0 0 1 748 127H668A14 14 0 0 1 654 113V99A14 14 0 0 1 668 85ZM666 152H738A12 12 0 0 1 750 164V178A12 12 0 0 1 738 190H666A12 12 0 0 1 654 178V164A12 12 0 0 1 666 152ZM668 218H750A14 14 0 0 1 764 232V246A14 14 0 0 1 750 260H668A14 14 0 0 1 654 246V232A14 14 0 0 1 668 218Z" fill="#5CB6F6"/>
+  <path transform="translate(0 0) rotate(3 844 172)" d="M790 85H810A14 14 0 0 1 824 99V246A14 14 0 0 1 810 260H790A14 14 0 0 1 776 246V99A14 14 0 0 1 790 85ZM786 85H841A51 51 0 0 1 841 187H786ZM824 119V153H841A17 17 0 0 0 841 119ZM840 168L860 168Q872 168 876.78 179L907.22 249Q912 260 900 260L874 260Q862 260 857.84 248.74L832.16 179.26Q828 168 840 168Z" fill="#5CB6F6"/>
+  <circle cx="303" cy="186" r="72" fill="#5CB6F6"/>
+  <path d="M248 224H276" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M258 236H289" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M272 247H294" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="273" cy="145" r="12.5" fill="#FFFFFF"/>
+  <circle cx="339" cy="147" r="12.5" fill="#FFFFFF"/>
+  <ellipse cx="307" cy="179" rx="46" ry="38" fill="#FFFFFF"/>
+  <circle cx="273" cy="145" r="5.5" fill="#5CB6F6"/>
+  <circle cx="339" cy="147" r="5.5" fill="#5CB6F6"/>
+  <circle cx="292" cy="171" r="6.5" fill="#5CB6F6"/>
+  <circle cx="294.2" cy="168.6" r="2.2" fill="#FFFFFF"/>
+  <circle cx="324" cy="171" r="6.5" fill="#5CB6F6"/>
+  <circle cx="326.2" cy="168.6" r="2.2" fill="#FFFFFF"/>
+  <ellipse cx="308" cy="185" rx="8" ry="5.5" fill="#5CB6F6"/>
+  <path d="M298 192Q303 197.5 308 193Q313 197.5 318 192" fill="none" stroke="#5CB6F6" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="301" y="196" width="7.5" height="11.5" rx="2.2" fill="#FFFFFF" stroke="#5CB6F6" stroke-width="3"/>
+  <rect x="308.5" y="196" width="7.5" height="11.5" rx="2.2" fill="#FFFFFF" stroke="#5CB6F6" stroke-width="3"/>
+</svg>

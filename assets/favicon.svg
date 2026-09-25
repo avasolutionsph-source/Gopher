@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="t">
+  <title id="t">Gopher</title>
+  <circle cx="80" cy="80" r="76" fill="#5CB6F6"/>
+  <path d="M21.94 120.11H51.5" stroke="#FFFFFF" stroke-width="6.33" stroke-linecap="round"/>
+  <path d="M32.5 132.78H65.22" stroke="#FFFFFF" stroke-width="6.33" stroke-linecap="round"/>
+  <path d="M47.28 144.39H70.5" stroke="#FFFFFF" stroke-width="6.33" stroke-linecap="round"/>
+  <circle cx="48.33" cy="36.72" r="13.19" fill="#FFFFFF"/>
+  <circle cx="118" cy="38.83" r="13.19" fill="#FFFFFF"/>
+  <ellipse cx="84.22" cy="72.61" rx="48.56" ry="40.11" fill="#FFFFFF"/>
+  <circle cx="48.33" cy="36.72" r="5.81" fill="#5CB6F6"/>
+  <circle cx="118" cy="38.83" r="5.81" fill="#5CB6F6"/>
+  <circle cx="68.39" cy="64.17" r="6.86" fill="#5CB6F6"/>
+  <circle cx="70.71" cy="61.63" r="2.32" fill="#FFFFFF"/>
+  <circle cx="102.17" cy="64.17" r="6.86" fill="#5CB6F6"/>
+  <circle cx="104.49" cy="61.63" r="2.32" fill="#FFFFFF"/>
+  <ellipse cx="85.28" cy="78.94" rx="8.44" ry="5.81" fill="#5CB6F6"/>
+  <path d="M74.72 86.33Q80 92.14 85.28 87.39Q90.56 92.14 95.83 86.33" fill="none" stroke="#5CB6F6" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="77.89" y="90.56" width="7.92" height="12.14" rx="2.32" fill="#FFFFFF" stroke="#5CB6F6" stroke-width="3.17"/>
+  <rect x="85.81" y="90.56" width="7.92" height="12.14" rx="2.32" fill="#FFFFFF" stroke="#5CB6F6" stroke-width="3.17"/>
+</svg>

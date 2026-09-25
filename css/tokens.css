@@ -1,0 +1,66 @@
+/* Gopher design tokens — the brand lives here.
+ *
+ * Light blue carries the brand; darker blues carry text so it stays readable
+ * (WCAG AA). Contrast on white is noted where a shade may be used for text.
+ */
+:root {
+  /* Blue ramp, built around the logo blue (--blue-400). */
+  --blue-50: #F1F8FE;   /* page tints            (bg only) */
+  --blue-100: #E1F0FD;  /* chips, soft cards     (bg only) */
+  --blue-200: #C2E2FB;  /* borders on tints      (bg only) */
+  --blue-300: #93CCF9;  /* light buttons with --blue-900 text (6.4:1) */
+  --blue-400: #5CB6F6;  /* LOGO BLUE — shapes, illustrations; never text on white */
+  --blue-500: #2E9BEA;  /* decorative */
+  --blue-600: #1580D1;  /* icons, large headings only (4.2:1) */
+  --blue-700: #0B67AD;  /* main buttons (white text), links (5.9:1; 5.1:1 on --blue-100) */
+  --blue-800: #0D538A;  /* hover / pressed (8.0:1) */
+  --blue-900: #0F3F66;  /* text on light-blue surfaces (10.9:1; 4.9:1 on --blue-400) */
+
+  --ink: #0F172A;        /* body text (17.9:1) */
+  --ink-2: #334155;      /* strong secondary (10.4:1) */
+  --ink-muted: #475569;  /* secondary text (7.6:1; 7.1:1 on --blue-50) */
+  --line: #E2E8F0;       /* dividers */
+  --line-strong: #8492A6;/* input borders (3.2:1) */
+
+  --bg: #FFFFFF;
+  --bg-soft: #F6F9FC;
+  --surface: #FFFFFF;
+
+  --ok: #15803D;   --ok-bg: #DCFCE7;    /* 4.6:1 on its tint */
+  --warn: #92400E; --warn-bg: #FEF3C7;  /* 6.4:1 */
+  --bad: #B91C1C;  --bad-bg: #FEE2E2;   /* 5.3:1 */
+  --star: #F59E0B;                      /* decorative; ratings always show the number too */
+
+  --brand: var(--blue-400);
+  --primary: var(--blue-700);
+  --primary-hover: var(--blue-800);
+
+  --font: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --fs-xs: 0.75rem;   /* 12 */
+  --fs-sm: 0.875rem;  /* 14 */
+  --fs-md: 1rem;      /* 16 */
+  --fs-lg: 1.125rem;  /* 18 */
+  --fs-xl: 1.25rem;   /* 20 */
+  --fs-2xl: 1.5rem;   /* 24 */
+  --fs-3xl: 1.875rem; /* 30 */
+  --fs-4xl: 2.375rem; /* 38 */
+  --fs-5xl: 3rem;     /* 48 */
+
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px;
+
+  --r-sm: 8px; --r-md: 12px; --r-lg: 16px; --r-xl: 24px; --r-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 63, 102, .08);
+  --shadow-md: 0 4px 14px rgba(15, 63, 102, .10);
+  --shadow-lg: 0 18px 40px rgba(15, 63, 102, .16);
+  --focus-ring: 0 0 0 3px #fff, 0 0 0 5px var(--blue-700);
+
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: 180ms;
+
+  --appbar-h: 56px;
+  --tabbar-h: 64px;
+}
