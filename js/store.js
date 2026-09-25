@@ -594,6 +594,13 @@
     commit({ type: 'session' });
     return state.users[id];
   }
+  // Log in with the email used at sign-up (the demo doesn't store or check passwords).
+  function loginByEmail(email) {
+    const e = String(email || '').trim().toLowerCase();
+    const u = Object.values(state.users).find((x) => x.email === e && !x.deleted);
+    if (!u) throw err('NOT_FOUND', 'We couldn’t find an account with that email. Check it, or create an account.');
+    return login(u.id);
+  }
   function logout() {
     state.meId = null;
     commit({ type: 'session' });
@@ -756,7 +763,7 @@
   const sync = {
     init, reset, raw: () => state, isMemoryOnly: () => memoryOnly,
     me: () => (state.meId ? state.users[state.meId] : null), user: (id) => state.users[id] || null,
-    users: () => Object.values(state.users), login, logout, signup, updateMe, cashOut,
+    users: () => Object.values(state.users), login, loginByEmail, logout, signup, updateMe, cashOut,
     listings: listingsQuery, listing: (id) => state.listings[id] || null, createListing, photoSrc, approveListing, simRequest,
     approveVerification,
     listingRating, ratingOf, reviewsFor,

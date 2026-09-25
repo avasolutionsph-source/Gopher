@@ -16,7 +16,8 @@
 
   function routes() {
     R.add('/welcome', 'welcome', { public: true, guestOnly: true });
-    R.add('/signup', 'signup', { public: true, guestOnly: true });
+    R.add('/login', 'login', { public: true });
+    R.add('/signup', 'signup', { public: true });
     R.add('/home', 'home');
     R.add('/explore', 'explore');
     R.add('/errand/new', 'errandNew');
@@ -62,7 +63,7 @@
   function backFallback() {
     const cur = R.current();
     const name = cur && cur.route && cur.route.name;
-    return { order: '/activity', listing: '/explore', checkout: '/home', user: '/explore', wallet: '/profile', reader: '/activity', signup: '/welcome' }[name] || '/home';
+    return { order: '/activity', listing: '/explore', checkout: '/home', user: '/explore', wallet: '/profile', reader: '/activity', signup: '/welcome', login: '/welcome' }[name] || '/home';
   }
 
   function plusSheet() {

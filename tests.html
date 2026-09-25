@@ -317,6 +317,17 @@
       eq(S.pay(S.createDraft('rental', { listingId: 'ls_calc991', days: 1 }), 'gcash').status, 'requested', 'can book after');
     });
 
+    test('log in: with the email used at sign-up; unknown emails are refused', () => {
+      fresh();
+      eq(S.loginByEmail('  Bea.Santos@gbox.adnu.edu.ph ').id, 'u_bea', 'case and spaces ignored');
+      eq(S.me().id, 'u_bea');
+      throwsCode(() => S.loginByEmail('nobody@example.com'), 'NOT_FOUND');
+      S.logout();
+      const u = S.signup({ first: 'Ana', last: 'Reyes', email: 'ana.reyes@gmail.com', method: 'id', proof: true });
+      S.logout();
+      eq(S.loginByEmail('ana.reyes@gmail.com').id, u.id, 'new accounts can log back in');
+    });
+
     // ---- safety -------------------------------------------------------------------------------------------------
     test('XSS: user text is escaped everywhere it is rendered', () => {
       fresh('u_bea');

@@ -237,6 +237,22 @@
       await waitFor(() => !byText('.notice', 'checking your student ID'), 'banner gone');
     });
 
+    await test('log in: switch from Bea to Migs with an email and password', async () => {
+      await load('as=bea', '#/home');
+      await route('home');
+      W().location.hash = '#/login';
+      await route('login');
+      await waitFor(() => byText('.notice', 'logged in as'), 'already-logged-in notice');
+      const f = $('form[data-form="login"]');
+      f.email.value = 'nobody@example.com'; f.password.value = 'x';
+      click(f.querySelector('button[type="submit"]'));
+      await waitFor(() => byText('[data-error]', 'couldn’t find an account'), 'unknown email error');
+      f.email.value = 'migs.reyes@gbox.adnu.edu.ph'; f.password.value = 'anything';
+      click(f.querySelector('button[type="submit"]'));
+      await route('home');
+      await waitFor(() => byText('h1', 'Migs'), 'greeting for Migs');
+    });
+
     await test('every screen opens without errors', async () => {
       await load('as=bea', '#/home');
       for (const [hash, name] of [['#/explore?tab=rentals', 'explore'], ['#/explore?tab=jobs', 'explore'], ['#/activity', 'activity'], ['#/profile', 'profile'],

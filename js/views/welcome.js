@@ -17,8 +17,14 @@
         <div class="welcome-hero">
           <img class="welcome-logo" src="assets/brand/logo.svg" alt="Gopher" width="920" height="270">
           <h1 class="welcome-title">Can’t leave class? Gopher it.</h1>
-          <p class="welcome-sub">Errands, rentals, and reviewers from fellow students. Pick someone to try the demo as:</p>
+          <p class="welcome-sub">Errands, rentals, and reviewers from fellow students.</p>
         </div>
+        <div class="welcome-auth">
+          <a class="btn btn-primary btn-lg" href="#/login">Log in</a>
+          <a class="btn btn-soft btn-lg" href="#/signup">Sign up</a>
+        </div>
+        <p class="xsmall muted center mt-2">New accounts verify with a student ID or matriculation form.</p>
+        <div class="auth-divider"><span>or try the demo as</span></div>
         <div class="persona-list">
           ${PERSONAS.map((p, i) => {
             const u = users[i];
@@ -32,11 +38,6 @@
               ${UI.ic('chevron-right')}
             </button>`;
           })}
-        </div>
-        <div class="welcome-alt">
-          <p class="muted small">New here?</p>
-          <a class="btn btn-soft btn-block" href="#/signup">${UI.ic('badge-check', { size: 18 })} Create an account</a>
-          <p class="xsmall muted mt-2">You’ll verify with your student ID or matriculation form.</p>
         </div>
         <p class="welcome-foot">Prototype · no real payments · data stays on this device · all people are fictional.<br>
           <a href="index.html">About Gopher</a> · <a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="help.html">Help</a></p>

@@ -64,8 +64,9 @@
   }
 
   G.views.signup = {
-    title: 'Sign up', bare: true, back: true,
+    title: 'Sign up', bare: true,
     async mount(ctx) {
+      const current = await G.store.me();
       let acct = null;
       const proof = { method: 'id', src: '', name: '' };
 
@@ -75,6 +76,7 @@
         <h1>Create your account</h1>
         <p class="muted">Gopher is for currently enrolled college students. Next, you’ll verify with your student ID or matriculation form.</p>
         <div class="notice">${UI.ic('info', { size: 18 })}<span><strong>Demo:</strong> please don’t use your real details. Nothing you type leaves this device.</span></div>
+        ${current ? html`<p class="small muted mt-3">You’re logged in as <strong>${UI.name(current)}</strong>. Creating a new account switches you to it.</p>` : ''}
         <form class="auth-form" data-form="signup" novalidate>
           <label class="field"><span class="label">School</span>
             <select class="select" name="schoolId" required>
@@ -101,6 +103,7 @@
           <p class="error-text" data-error hidden></p>
           <button class="btn btn-primary btn-block btn-lg" type="submit">Continue</button>
         </form>
+        <p class="auth-switch">Already have an account? <a href="#/login">Log in</a></p>
       </div>`;
 
       const step2 = () => {

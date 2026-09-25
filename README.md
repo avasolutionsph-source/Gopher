@@ -35,6 +35,11 @@ own separate demo data.
 | **Migs R.** | 2nd year, BS Civil Engineering | Earning as a go-runner, lending a tripod |
 | New student | Sign up with any email, then upload a student ID or matriculation form (**Use sample** makes a fake one) | The sign-up and student-verification flow: "in review" for a few seconds, then verified |
 
+- **Log in:** use the **Log in** button in the site header, or open `app.html#/login`.
+  - Demo accounts: `bea.santos@gbox.adnu.edu.ph` and `migs.reyes@gbox.adnu.edu.ph`, with any password.
+  - Accounts you create with **Sign up** can log back in with their email.
+  - Passwords aren't checked or saved in the demo.
+
 ## Presenting
 
 - **The Demo panel** sits to the right of the phone on a laptop. On a phone,
@@ -111,10 +116,10 @@ Every file is static; there's no server code.
 
 With the local server running, open:
 
-- <http://localhost:8090/tests.html>: 21 checks on the data and the simulator.
+- <http://localhost:8090/tests.html>: 22 checks on the data and the simulator.
   They cover pricing, all five demo scripts, cancellations, permissions,
   hand-off codes, and escaping of typed text.
-- <http://localhost:8090/tests-ui.html>: 9 click-through tests that press the
+- <http://localhost:8090/tests-ui.html>: 10 click-through tests that press the
   real buttons in the app.
 
 Both use their own separate data, so they never touch your demo data.

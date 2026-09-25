@@ -27,7 +27,19 @@ html { scroll-behavior: smooth; }
 .header-inner { display: flex; align-items: center; gap: var(--sp-2); min-height: var(--site-header-h); }
 .header-inner .brand { margin-right: auto; padding: 4px 0; border-radius: var(--r-sm); }
 .header-inner .brand img { height: 32px; width: auto; }
-.header-cta { order: 2; }
+.header-actions { order: 2; display: flex; align-items: center; gap: 6px; }
+.header-actions .btn { white-space: nowrap; }
+/* Phones: Log in + Sign up stay visible; "Try the demo" lives in the menu and the hero. */
+.header-actions .header-cta { display: none; }
+.header-signup { --btn-bg: var(--primary); --btn-fg: #fff; --btn-bd: var(--primary); }
+.header-signup:hover { --btn-bg: var(--primary-hover); --btn-bd: var(--primary-hover); }
+.hero-auth { margin: var(--sp-4) 0 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.hero-auth a { font-weight: 700; }
+@media (max-width: 380px) {
+  .header-actions { gap: 2px; }
+  .header-actions .btn-sm { padding-left: 10px; padding-right: 10px; }
+  .header-inner .brand img { height: 28px; }
+}
 .nav-toggle {
   order: 3; width: 44px; padding: 0;
   --btn-bg: transparent; --btn-bd: transparent; --btn-fg: var(--ink);
@@ -51,6 +63,11 @@ html { scroll-behavior: smooth; }
   .header-inner { gap: var(--sp-3); }
   .header-inner .brand { margin-right: 0; }
   .nav-toggle { display: none; }
+  .header-actions { gap: var(--sp-2); }
+  .header-actions .header-cta { display: inline-flex; }
+  .header-signup { --btn-bg: var(--blue-100); --btn-fg: var(--blue-900); --btn-bd: var(--blue-100); }
+  .header-signup:hover { --btn-bg: var(--blue-200); --btn-bd: var(--blue-200); }
+  .site-nav .nav-demo { display: none; }
   .site-nav, .site-nav.is-open {
     display: block; order: 1; position: static; margin: 0 auto;
     background: none; border: 0; box-shadow: none;
